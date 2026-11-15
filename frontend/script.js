@@ -1,5 +1,5 @@
 // Apne Vercel Backend ka Live URL
-const BACKEND_URL = 'https://weather-fyp-backend.vercel.app';
+const BACKEND_URL = 'https://weather-fyp.vercel.app';
 
 const themeToggleBtn = document.getElementById('themeToggleBtn');
 const searchBtn = document.getElementById('searchBtn');
