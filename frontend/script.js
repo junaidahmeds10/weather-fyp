@@ -1,5 +1,5 @@
-// Test/Public API Key for immediate working (fallback)
-const API_KEY = 'e573010b91d9043236e788e0018f3a57';
+// Apne Vercel Backend ka Live URL
+const BACKEND_URL = 'https://weather-fyp-backend.vercel.app';
 
 const themeToggleBtn = document.getElementById('themeToggleBtn');
 const searchBtn = document.getElementById('searchBtn');
@@ -124,15 +124,13 @@ if (cityInput) {
     });
 }
 
-// Main Weather Fetch Function (Connected to Backend API & MongoDB)
-// Main Weather Fetch Function (Connected to Backend API & MongoDB)
+// Main Weather Fetch Function (Connected to Live Backend API & MongoDB)
 async function fetchWeather(city) {
     try {
-        const res = await fetch(`http://localhost:5000/api/weather/${encodeURIComponent(city)}`);
+        const res = await fetch(`${BACKEND_URL}/api/weather/${encodeURIComponent(city)}`);
         const data = await res.json();
         
         if (res.ok) {
-            // Backend se aane wale object ke keys (city, temp, condition, windSpeed, humidity, clouds) ke mutabiq UI update
             document.getElementById('displayCity').innerText = `Saad Shaikh • ${data.city}`;
             document.getElementById('mainTemp').innerText = `${data.temp}°C`;
             document.getElementById('weatherCondition').innerText = data.condition;
@@ -140,14 +138,13 @@ async function fetchWeather(city) {
             document.getElementById('humidityVal').innerText = `${data.humidity}%`;
             document.getElementById('rainVal').innerText = `${data.clouds}%`;
             
-            // Clear search input after success
             if (cityInput) cityInput.value = '';
         } else {
             alert(`City not found: "${city}". Please check the spelling.`);
         }
     } catch (err) {
         console.error('Network or API Error:', err);
-        alert('Failed to connect to backend server. Make sure node server.js is running.');
+        alert('Failed to connect to live backend server.');
     }
 }
 
