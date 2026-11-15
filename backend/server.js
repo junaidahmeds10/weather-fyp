@@ -20,6 +20,11 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log('✅ MongoDB Atlas Connected Successfully'))
   .catch((err) => console.error('❌ MongoDB Connection Error:', err));
 
+// Test Route (Vercel par link kholne par check karne ke liye)
+app.get('/', (req, res) => {
+    res.send('Weather FYP Backend is Live and Running!');
+});
+
 // Weather API Route (Matches Frontend: /api/weather/:city)
 app.get('/api/weather/:city', async (req, res) => {
     try {
@@ -71,7 +76,11 @@ app.get('/api/weather/:city', async (req, res) => {
     }
 });
 
-// Start Server
-app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:5000`);
-});
+// Start Server (Local aur Vercel dono ke liye)
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`🚀 Server running on http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
